@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Gustossi Bolivia</title>
+    <link rel="icon" href="images/icons/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="images/icons/logo-white.png" alt="Gustossi" class="logo">
+            <h2>Panel Admin</h2>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="active"><i class="fa-solid fa-box"></i> Productos</a></li>
+            <li><a href="#"><i class="fa-solid fa-list"></i> Categorías</a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i> Mensajes</a></li>
+            <li><a href="index.html" target="_blank"><i class="fa-solid fa-globe"></i> Ver Web</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Gestión de Productos</h1>
+            <div class="user-info">
+                <span>Hola, Administrador</span>
+                <i class="fa-solid fa-user-circle"></i>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <div class="actions-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Buscar producto...">
+                </div>
+                <button class="btn btn-primary" onclick="openModal('add')">
+                    <i class="fa-solid fa-plus"></i> Nuevo Producto
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Destacado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table-body">
+                        <!-- Los productos se cargarán aquí por JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Add/Edit Product -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Agregar Producto</h2>
+                <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="prod-id">
+                    
+                    <div class="form-group">
+                        <label for="prod-nombre">Nombre del Producto *</label>
+                        <input type="text" id="prod-nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-categoria">Categoría *</label>
+                        <select id="prod-categoria" required>
+                            <!-- Se carga por JS -->
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="prod-destacado">
+                                Producto Destacado
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prod-imagen">Imagen del Producto</label>
+                        <input type="file" id="prod-imagen-file" accept="image/*" onchange="previewImage(event)">
+                        <input type="hidden" id="prod-imagen-base64">
+                        <input type="hidden" id="prod-imagen">
+                        <div style="margin-top:10px;">
+                            <img id="img-preview" src="" style="max-width: 100px; max-height: 100px; display: none; border-radius: 4px; border: 1px solid #ccc;">
+                        </div>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="js/admin.js"></script>
+</body>
+</html>
