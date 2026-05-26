@@ -296,18 +296,14 @@ function renderReviews() {
   if (!grid) return;
   grid.innerHTML = REVIEWS.map(r => `
     <div class="rev-card reveal">
+      <div class="rev-av">
+        <img src="${r.av}" alt="${r.nombre}"
+          onerror="this.parentElement.outerHTML='<div class=\\'rev-av-fb\\'>${r.ini}</div>'">
+      </div>
+      <div class="rev-name">${r.nombre}</div>
+      <div class="rev-src"><i class="${r.ico}"></i> ${r.src}</div>
       <div class="rev-stars">${'<i class="fa-solid fa-star"></i>'.repeat(5)}</div>
       <p class="rev-text">${r.txt}</p>
-      <div class="rev-author">
-        <div class="rev-av">
-          <img src="${r.av}" alt="${r.nombre}"
-            onerror="this.parentElement.outerHTML='<div class=\\'rev-av-fb\\'>${r.ini}</div>'">
-        </div>
-        <div>
-          <div class="rev-name">${r.nombre}</div>
-          <div class="rev-src"><i class="${r.ico}"></i> ${r.src}</div>
-        </div>
-      </div>
     </div>`).join('');
   initReveal();
 }
